@@ -1,2 +1,2 @@
-# tanstack-router-firebase-examples
-tanstack-router-firebase-examples
+# nextjs-supabase-examples
+nextjs-supabase-examples

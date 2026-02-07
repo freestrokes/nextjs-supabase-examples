@@ -77,8 +77,8 @@ function Home() { // Renamed from App to Home for Next.js pages
   |-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
   const { data }: UseQueryResult = useFetchPosts(postsParam);
-  const createPost: UseMutationResult = useCreatePost();
-  const deletePost: UseMutationResult = useDeletePost();
+  const createPost = useCreatePost();
+  const deletePost = useDeletePost();
 
   // const useSignup = (mutationOptions?: UseMutationCustomOptions) => {
   //   return useMutation({

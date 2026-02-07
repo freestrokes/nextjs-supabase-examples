@@ -28,8 +28,8 @@ export const useFetchPost = (id: string) => useQuery({
 	// enabled: enabled ?? false,
 });
 
-export const useCreatePost = (param: any) => useMutation({
-	mutationFn: () => PostService.createPost(param),
+export const useCreatePost = () => useMutation({
+	mutationFn: (param: any) => PostService.createPost(param),
 	retry: 0,
 	onMutate: (variables) => {
 		// A mutation is about to happen!

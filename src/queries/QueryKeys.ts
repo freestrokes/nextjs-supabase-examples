@@ -11,3 +11,9 @@ export const postQueryKeys = {
 	// list: (filters: string) => [...postQueryKeys.lists(), { filters }] as const,
 	// detail: (id: number) => [...postQueryKeys.details(), id] as const,
 };
+
+export const jsonPlaceholderQueryKeys = {
+  all: ['jsonPlaceholder'] as const,
+  posts: () => [...jsonPlaceholderQueryKeys.all, 'posts'] as const,
+  post: (id: number) => [...jsonPlaceholderQueryKeys.posts(), id] as const,
+};

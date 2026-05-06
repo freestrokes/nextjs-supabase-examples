@@ -1,5 +1,8 @@
 import { create } from "zustand";
-import { ModalState } from "@/states/ModalState";
+export interface ModalState {
+        modalOpen: boolean;
+        toggleModal: () => void;
+};
 
 const useModalStore = create<ModalState>()((set) => ({
 	modalOpen: false,

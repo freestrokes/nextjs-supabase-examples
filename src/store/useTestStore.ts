@@ -1,6 +1,11 @@
 import { create } from 'zustand'
 import { ExtractState, StoreApi } from 'zustand/index';
-import { TestState } from '@/states/TestState';
+export interface TestState {
+        bears: number;
+        increasePopulation: () => void;
+        removeAllBears: () => void;
+        updateBears: (newBears: number) => void;
+}
 
 const useTestStore = create<TestState>()((set) => ({
 	bears: 0,

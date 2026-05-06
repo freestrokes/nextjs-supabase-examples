@@ -1,6 +1,15 @@
 import { create, ExtractState, StoreApi } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CommonState } from '@/states/CommonState';
+export interface CommonState {
+        lang: string;
+        spinner: boolean;
+        title: string;
+        accessToken: string;
+        updateLang: (lang: string) => void;
+        updateSpinner: (isActive: boolean) => void;
+        updateTitle: (title: string) => void;
+        updateAccessToken: (accessToken: string) => void;
+}
 
 export const useCommonStore = create(
 	persist<CommonState>(

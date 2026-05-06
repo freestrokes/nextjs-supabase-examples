@@ -17,7 +17,7 @@ import {
   useTestIncreasePopulation,
   useTestRemoveAllBears,
   useTestUpdateBears
-} from '@/stores/useTestStore';
+} from '@/store/useTestStore';
 // import useCommonStore, {
 //   // useCommonState,
 //   // useCommonLangValue,
@@ -28,8 +28,8 @@ import {
 //   // useCommonUpdateSpinner,
 //   // useCommonUpdateTitle,
 //   // useCommonUpdateAccessToken
-// } from '@/stores/useCommonStore';
-import { useCommonStore } from '@/stores/useCommonStore';
+// } from '@/store/useCommonStore';
+import { useCommonStore } from '@/store/useCommonStore';
 // import useStore from "@/store";
 
 // const queryClient = new QueryClient();

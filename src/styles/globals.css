@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
+@theme {
+  --font-inter: "Inter", sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #08090a;
+  --foreground: #f7f8f8;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+  /* Linear's signature Inter configuration */
+  font-feature-settings: "cv01", "ss03";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Linear-style selection */
+::selection {
+  background-color: #5e6ad2;
+  color: #ffffff;
+}
+
+/* Custom Scrollbar for Linear feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Quill Editor Dark Theme Customization */
+.ql-container.ql-snow {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0 0 6px 6px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #f7f8f8;
+}
+
+.ql-toolbar.ql-snow {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-bottom: none !important;
+  border-radius: 6px 6px 0 0;
+  background: #0f1011;
+}
+
+.ql-snow .ql-stroke {
+  stroke: #d0d6e0 !important;
+}
+
+.ql-snow .ql-fill {
+  fill: #d0d6e0 !important;
+}
+
+.ql-snow .ql-picker {
+  color: #d0d6e0 !important;
 }

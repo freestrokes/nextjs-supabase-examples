@@ -1,6 +1,5 @@
 import { create, ExtractState, StoreApi } from "zustand";
 import { User } from "@/types/User";
-import { User } from "@/types/User";
 
 export interface UserState {
         user: User;

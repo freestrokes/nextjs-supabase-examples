@@ -9,7 +9,6 @@ interface AuthState {
   setSession: (session: Session | null) => void;
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
-  signInWithKakao: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -28,14 +27,6 @@ export const useAuthStore = create<AuthState>((set) => ({
   signInWithGoogle: async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
-  },
-  signInWithKakao: async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'kakao',
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },

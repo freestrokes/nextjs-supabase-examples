@@ -5,7 +5,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { Layout } from '@/components/layout/Layout';
 
 const LoginPage = () => {
-  const { signInWithGoogle, signInWithKakao } = useAuthStore();
+  const { signInWithGoogle } = useAuthStore();
 
   return (
     <Layout showHeader={false}>
@@ -27,12 +27,6 @@ const LoginPage = () => {
               onClick={signInWithGoogle}
             >
               Continue with Google
-            </Button>
-            <Button
-              className="w-full h-11 bg-[#FEE500] text-[#191919] hover:bg-[#FEE500]/90"
-              onClick={signInWithKakao}
-            >
-              Continue with Kakao
             </Button>
           </div>
         </Card>

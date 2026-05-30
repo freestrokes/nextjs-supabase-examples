@@ -6,18 +6,19 @@ export default function AuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        router.push('/dashboard');
+    const handleCallback = async () => {
+      // URL에서 'code' 파라미터를 추출하여 세션으로 교환
+      const code = new URLSearchParams(window.location.search).get('code');
+      
+      if (code) {
+        await supabase.auth.exchangeCodeForSession(code);
       }
-    });
+      
+      // 세션 설정이 완료되면 대시보드로 이동
+      router.push('/dashboard');
+    };
 
-    // 만약 이미 세션이 있다면 즉시 이동
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) router.push('/dashboard');
-    });
-
-    return () => subscription.unsubscribe();
+    handleCallback();
   }, [router]);
 
   return (

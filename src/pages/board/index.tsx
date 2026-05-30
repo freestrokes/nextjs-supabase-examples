@@ -66,15 +66,15 @@ const BoardListPage = () => {
                     </div>
                     
                     <div className="flex items-center gap-6 shrink-0 ml-4">
-                      <div className="hidden sm:flex items-center gap-2">
+                      <div className="hidden lg:flex items-center gap-2">
                         <div className="h-1.5 w-1.5 rounded-full bg-linear-indigo/50" />
                         <span className="text-[11px] font-medium px-1.5 py-0.5 rounded bg-linear-indigo/10 text-linear-indigo/80">Feature</span>
                       </div>
-                      <div className="flex items-center gap-2 text-[12px] text-linear-text-tertiary min-w-[100px] justify-end">
-                        <Clock size={12} />
-                        <span>{new Date(post.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+                      <div className="flex items-center gap-2 text-[12px] text-linear-text-tertiary sm:min-w-[100px] justify-end">
+                        <Clock size={12} className="hidden sm:block" />
+                        <span className="shrink-0">{new Date(post.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
                       </div>
-                      <div className="h-6 w-6 rounded-full bg-white/[0.05] border border-white/[0.05] flex items-center justify-center text-[10px] font-bold text-linear-text-secondary uppercase">
+                      <div className="hidden sm:flex h-6 w-6 rounded-full bg-white/[0.05] border border-white/[0.05] items-center justify-center text-[10px] font-bold text-linear-text-secondary uppercase">
                         {post.author_name.slice(0, 1)}
                       </div>
                     </div>

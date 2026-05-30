@@ -49,7 +49,7 @@ const DashboardPage = () => {
         </header>
 
         {/* Section 2: Monitoring Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard 
             title="Total Issues" 
             value={stats.totalPosts} 
@@ -80,11 +80,11 @@ const DashboardPage = () => {
           <div className="flex items-center justify-between px-1">
             <h2 className="text-[14px] font-semibold text-linear-text-secondary uppercase tracking-wider">Recent Discoveries</h2>
             <Link href="/board" className="text-[12px] text-linear-text-tertiary hover:text-linear-indigo flex items-center gap-1 transition-colors">
-              View all issues <ArrowUpRight size={14} />
+              View all <ArrowUpRight size={14} />
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {isLoading ? (
               Array(3).fill(0).map((_, i) => (
                 <div key={i} className="h-32 rounded-lg bg-white/[0.02] border border-white/[0.05] animate-pulse" />

@@ -67,7 +67,7 @@ const BoardDetailPage = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-6 order-1">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <span className="text-[12px] font-mono font-medium text-linear-indigo px-2 py-0.5 rounded bg-linear-indigo/10 border border-linear-indigo/20">
@@ -76,21 +76,21 @@ const BoardDetailPage = () => {
                 <span className="h-1 w-1 rounded-full bg-white/[0.2]" />
                 <span className="text-[12px] text-linear-text-tertiary font-medium uppercase tracking-wider">Feature Request</span>
               </div>
-              <h1 className="text-[32px] font-medium text-linear-text-primary tracking-display leading-tight">
+              <h1 className="text-[24px] md:text-[32px] font-medium text-linear-text-primary tracking-display leading-tight">
                 {post.title}
               </h1>
             </div>
 
-            <Card className="p-8 border-white/[0.05] bg-white/[0.01] min-h-[300px]">
+            <Card className="p-4 md:p-8 border-white/[0.05] bg-white/[0.01] min-h-[200px] md:min-h-[300px]">
               <div 
-                className="prose prose-invert max-w-none text-[15px] leading-relaxed text-linear-text-secondary font-normal"
+                className="prose prose-invert max-w-none text-[14px] md:text-[15px] leading-relaxed text-linear-text-secondary font-normal"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
             </Card>
           </div>
 
           {/* Sidebar Metadata */}
-          <div className="space-y-6 lg:border-l lg:border-white/[0.05] lg:pl-8">
+          <div className="space-y-6 lg:border-l lg:border-white/[0.05] lg:pl-8 order-2 lg:order-2">
             <div className="space-y-1">
               <p className="text-[11px] font-medium text-linear-text-tertiary uppercase tracking-widest">Properties</p>
               <div className="py-2 space-y-4">

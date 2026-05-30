@@ -56,6 +56,11 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
+  // 0. 콜백 페이지는 인증 체크 제외 (세션 처리 중인 상태이므로)
+  if (request.nextUrl.pathname === '/auth/callback') {
+    return response
+  }
+
   // 1. 홈 화면(/) 접근 시
   if (request.nextUrl.pathname === '/') {
     return NextResponse.redirect(new URL('/dashboard', request.url))

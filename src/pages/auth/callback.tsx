@@ -6,17 +6,18 @@ export default function AuthCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    const handleAuthCallback = async () => {
-      const { error } = await supabase.auth.getSession();
-      if (error) {
-        console.error('Error during auth callback:', error.message);
-        router.push('/auth/login');
-      } else {
-        router.push('/board');
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        router.push('/dashboard');
       }
-    };
+    });
 
-    handleAuthCallback();
+    // 만약 이미 세션이 있다면 즉시 이동
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.push('/dashboard');
+    });
+
+    return () => subscription.unsubscribe();
   }, [router]);
 
   return (

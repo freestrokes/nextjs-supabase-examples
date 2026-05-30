@@ -1,18 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useAuthStore } from '@/store/useAuthStore';
 import { supabase } from '@/lib/supabase/client';
 import { Button } from '@/components/common/Button';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { 
+  LayoutDashboard, 
+  MessageSquare, 
+  Settings, 
+  LogOut, 
+  ChevronLeft, 
+  ChevronRight,
+  PlusCircle,
+  Search,
+  Clock
+} from 'lucide-react';
+import { cn } from '@/utils/cn';
 
 interface LayoutProps {
   children: React.ReactNode;
-  showHeader?: boolean;
 }
 
-export const Layout = ({ children, showHeader = true }: LayoutProps) => {
+export const Layout = ({ children }: LayoutProps) => {
   const { user, setSession, signOut } = useAuthStore();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -27,49 +41,120 @@ export const Layout = ({ children, showHeader = true }: LayoutProps) => {
     return () => subscription.unsubscribe();
   }, [setSession]);
 
+  if (!mounted) return null;
+
+  const navItems = [
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { name: 'Issues', href: '/board', icon: MessageSquare },
+    { name: 'Recent', href: '#', icon: Clock },
+  ];
+
+  const isAuthPage = router.pathname.startsWith('/auth');
+
+  if (isAuthPage) {
+    return (
+      <div className="min-h-screen bg-linear-black font-inter antialiased text-linear-text-primary">
+        <Head>
+          <title>Linear Board</title>
+        </Head>
+        <main className="flex min-h-screen items-center justify-center">
+          {children}
+        </main>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-linear-black font-inter antialiased">
+    <div className="flex min-h-screen bg-linear-black font-inter antialiased text-linear-text-primary">
       <Head>
         <title>Linear Board</title>
       </Head>
 
-      {showHeader && (
-        <header className="sticky top-0 z-50 flex h-13 items-center justify-between border-b border-white/[0.05] bg-linear-black/60 px-6 backdrop-blur-xl">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="h-5 w-5 rounded-[4px] bg-linear-indigo flex items-center justify-center text-white font-bold text-[10px] shadow-[0_0_15px_rgba(94,106,210,0.3)]">L</div>
-              <span className="text-[13px] font-medium text-linear-text-primary tracking-tight group-hover:text-white transition-colors">
-                Linear Board
-              </span>
-            </Link>
-            
-            <nav className="hidden md:flex items-center gap-6">
-              <Link href="/board" className="text-[12px] font-medium text-linear-text-tertiary hover:text-linear-text-primary transition-colors">Issues</Link>
-              <Link href="#" className="text-[12px] font-medium text-linear-text-tertiary hover:text-linear-text-primary transition-colors">Cycle</Link>
-              <Link href="#" className="text-[12px] font-medium text-linear-text-tertiary hover:text-linear-text-primary transition-colors">Roadmap</Link>
+      {/* Sidebar */}
+      <aside 
+        className={cn(
+          "fixed left-0 top-0 z-40 h-screen border-r border-white/[0.05] bg-linear-panel transition-all duration-300 ease-in-out",
+          isCollapsed ? "w-[60px]" : "w-[240px]"
+        )}
+      >
+        <div className="flex h-full flex-col justify-between p-3">
+          <div className="space-y-6">
+            {/* User Profile / Logo */}
+            <div className={cn("flex items-center gap-3 px-2 py-2", isCollapsed && "justify-center")}>
+              <div className="h-6 w-6 rounded bg-linear-indigo flex items-center justify-center text-[10px] font-bold text-white shrink-0 shadow-lg">L</div>
+              {!isCollapsed && (
+                <span className="text-sm font-semibold truncate tracking-tight">
+                  {user?.email?.split('@')[0] || 'Guest'}
+                </span>
+              )}
+            </div>
+
+            {/* Nav Items */}
+            <nav className="space-y-1">
+              {navItems.map((item) => (
+                <Link 
+                  key={item.name} 
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors hover:bg-white/[0.05]",
+                    router.pathname === item.href ? "bg-white/[0.08] text-white" : "text-linear-text-tertiary",
+                    isCollapsed && "justify-center"
+                  )}
+                >
+                  <item.icon size={18} />
+                  {!isCollapsed && <span>{item.name}</span>}
+                </Link>
+              ))}
             </nav>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            {mounted && user ? (
-              <div className="flex items-center gap-3">
-                <span className="text-[12px] text-linear-text-tertiary font-medium">{user.email?.split('@')[0]}</span>
-                <div className="h-6 w-px bg-white/[0.08]" />
-                <Button variant="subtle" size="sm" className="h-7 text-[11px] px-2.5" onClick={signOut}>Sign Out</Button>
+
+            {/* Quick Actions */}
+            {!isCollapsed && (
+              <div className="px-2 space-y-4 pt-4">
+                <p className="text-[11px] font-bold text-linear-text-tertiary/40 uppercase tracking-widest">Workspace</p>
+                <div className="space-y-1">
+                  <button className="flex w-full items-center gap-3 px-1 py-1 text-[12px] text-linear-text-tertiary hover:text-linear-text-primary">
+                    <PlusCircle size={14} /> New Project
+                  </button>
+                  <button className="flex w-full items-center gap-3 px-1 py-1 text-[12px] text-linear-text-tertiary hover:text-linear-text-primary">
+                    <Search size={14} /> Search
+                  </button>
+                </div>
               </div>
-            ) : mounted ? (
-              <Link href="/auth/login">
-                <Button variant="primary" size="sm" className="h-8 px-4 text-[12px]">Sign In</Button>
-              </Link>
-            ) : (
-              <div className="h-8 w-16" /> // Placeholder while mounting
             )}
           </div>
-        </header>
-      )}
 
-      <main className="container mx-auto max-w-5xl p-4">
-        {children}
+          {/* Bottom Actions */}
+          <div className="space-y-1 border-t border-white/[0.05] pt-3">
+            <button 
+              onClick={signOut}
+              className={cn(
+                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-text-tertiary hover:bg-white/[0.05] hover:text-red-400/80 transition-colors",
+                isCollapsed && "justify-center"
+              )}
+            >
+              <LogOut size={18} />
+              {!isCollapsed && <span>Sign Out</span>}
+            </button>
+            <button 
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="flex w-full items-center justify-center py-2 text-linear-text-tertiary/30 hover:text-linear-text-tertiary transition-colors"
+            >
+              {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main 
+        className={cn(
+          "flex-1 transition-all duration-300",
+          isCollapsed ? "ml-[60px]" : "ml-[240px]"
+        )}
+      >
+        <div className="mx-auto max-w-5xl px-8 py-12">
+          {children}
+        </div>
       </main>
     </div>
   );

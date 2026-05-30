@@ -58,7 +58,7 @@ export async function middleware(request: NextRequest) {
 
   // 1. 홈 화면(/) 접근 시
   if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL(user ? '/board' : '/auth/login', request.url))
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
   // 2. 비로그인 사용자가 보호된 페이지 접근 시

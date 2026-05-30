@@ -8,7 +8,7 @@ const LoginPage = () => {
   const { signInWithGoogle } = useAuthStore();
 
   return (
-    <Layout showHeader={false}>
+    <Layout>
       <div className="flex min-h-screen items-center justify-center bg-linear-black p-4">
         <Card className="w-full max-w-md space-y-8 p-8 border-linear-border/20 shadow-2xl">
           <div className="text-center">

@@ -5,8 +5,17 @@
 }
 
 :root {
+  --background: #f7f8f8;
+  --foreground: #08090a;
+  --panel: #f3f4f5;
+  --border: #d0d6e0;
+}
+
+.dark {
   --background: #08090a;
   --foreground: #f7f8f8;
+  --panel: #0f1011;
+  --border: rgba(255, 255, 255, 0.05);
 }
 
 body {

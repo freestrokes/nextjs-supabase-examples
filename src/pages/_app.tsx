@@ -1,16 +1,13 @@
 import type { AppProps } from 'next/app';
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-import '../styles/globals.css'; // This will be created later
+import '../styles/globals.css';
+import { ThemeProvider } from 'next-themes';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {
       console.log('queryCache > onError > error', error);
-      console.log('queryCache > onError > query', query);
-      // if (query.state.data !== undefined) {
-      // 	toast.error(`Query Error: ${error.message}`);
-      // }
     },
     onSuccess: (data) => {
       console.log('queryCache > onSuccess', data);
@@ -19,7 +16,6 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
-      // cacheTime: 0,
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
@@ -31,9 +27,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <Component {...pageProps} />
-        </React.Suspense>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Component {...pageProps} />
+          </React.Suspense>
+        </ThemeProvider>
       </QueryClientProvider>
     </React.StrictMode>
   );

@@ -8,26 +8,36 @@
   --background: #ffffff;
   --foreground: #08090a;
   --panel: #f3f4f5;
-  --border: #d0d6e0;
+  --border: #e2e4e7;
   --text-primary: #08090a;
-  --text-secondary: #62666d;
+  --text-secondary: #474d57;
   --text-tertiary: #8a8f98;
+  --accent: #5e6ad2;
 }
 
 .dark {
   --background: #08090a;
   --foreground: #f7f8f8;
   --panel: #0f1011;
-  --border: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.08);
   --text-primary: #f7f8f8;
   --text-secondary: #d0d6e0;
   --text-tertiary: #8a8f98;
+  --accent: #7170ff;
 }
 
 body {
   background-color: var(--background);
   color: var(--text-primary);
   font-family: var(--font-inter);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Ensure all SVG icons inherit the correct theme color */
+svg {
+  color: inherit;
+}
+
   /* Linear's signature Inter configuration */
   font-feature-settings: "cv01", "ss03";
   -webkit-font-smoothing: antialiased;

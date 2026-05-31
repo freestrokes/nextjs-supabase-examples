@@ -87,11 +87,11 @@ const DashboardPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {isLoading ? (
               Array(3).fill(0).map((_, i) => (
-                <div key={i} className="h-32 rounded-lg bg-black/[0.02] dark:bg-white/[0.02] border border-linear-light-border dark:border-white/[0.05] animate-pulse" />
+                <div key={i} className="h-32 rounded-lg bg-black/[0.02] dark:bg-linear-panel border border-linear-light-border dark:border-linear-border animate-pulse" />
               ))
             ) : stats.recentPosts.map((post) => (
               <Link key={post.id} href={`/board/${post.id}`}>
-                <Card hoverable className="h-full p-5 flex flex-col justify-between border-linear-light-border dark:border-white/[0.05] bg-white dark:bg-white/[0.01]">
+                <Card hoverable className="h-full p-5 flex flex-col justify-between border-linear-light-border dark:border-linear-border bg-white dark:bg-white/[0.01]">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <MessageSquare size={14} className="text-linear-indigo" />
@@ -125,9 +125,9 @@ const DashboardPage = () => {
 const StatCard = ({ title, value, icon: Icon, trend, trendColor = "text-green-500/80 dark:text-green-400/80" }: any) => {
   const { t } = useConfigStore();
   return (
-    <Card className="p-5 space-y-3 border-linear-light-border dark:border-white/[0.05] bg-white dark:bg-white/[0.02]">
+    <Card className="p-5 space-y-3 border-linear-light-border dark:border-linear-border bg-white dark:bg-linear-panel">
       <div className="flex items-center justify-between">
-        <div className="h-8 w-8 rounded-lg bg-black/[0.03] dark:bg-white/[0.05] flex items-center justify-center text-black dark:text-linear-text-secondary">
+        <div className="h-8 w-8 rounded-lg bg-linear-panel dark:bg-white/[0.05] flex items-center justify-center text-black dark:text-linear-text-secondary">
           <Icon size={18} />
         </div>
         {trend && <span className={`text-[11px] font-bold ${trendColor}`}>{trend}</span>}

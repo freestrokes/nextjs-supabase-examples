@@ -141,7 +141,7 @@ export const Layout = ({ children }: LayoutProps) => {
                   key={item.name} 
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors hover:bg-white/[0.05]",
+                    "flex items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors hover:bg-linear-panel",
                     router.pathname === item.href 
                       ? "bg-white/[0.08] text-linear-text-primary" 
                       : "text-linear-text-tertiary",
@@ -177,14 +177,14 @@ export const Layout = ({ children }: LayoutProps) => {
               <div className="flex items-center justify-between px-2 mb-2">
                 <button 
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="p-1.5 rounded-md hover:bg-white/[0.05] text-linear-text-tertiary transition-colors"
+                  className="p-1.5 rounded-md hover:bg-linear-panel text-linear-text-tertiary transition-colors"
                   title="Toggle Theme"
                 >
                   {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
                 </button>
                 <button 
                   onClick={() => setLanguage(language === 'ko' ? 'en' : 'ko')}
-                  className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/[0.05] text-[11px] font-bold text-linear-text-tertiary uppercase transition-colors"
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-linear-panel text-[11px] font-bold text-linear-text-tertiary uppercase transition-colors"
                 >
                   <Globe size={14} /> {language}
                 </button>
@@ -194,7 +194,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <button 
               onClick={signOut}
               className={cn(
-                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-text-tertiary hover:bg-white/[0.05] hover:text-red-400/80 transition-colors",
+                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-text-tertiary hover:bg-linear-panel hover:text-red-400/80 transition-colors",
                 isCollapsed && "justify-center"
               )}
             >

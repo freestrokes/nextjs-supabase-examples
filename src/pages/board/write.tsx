@@ -8,11 +8,13 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/router';
 import { ChevronLeft, Send, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/utils/cn';
 
 const Editor = dynamic(() => import('@/components/board/Editor'), { ssr: false });
 
 const BoardWritePage = () => {
   const [mounted, setMounted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const { addPost } = useBoardStore();
@@ -25,14 +27,22 @@ const BoardWritePage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (!user) {
       alert('Please sign in first');
       return;
     }
     if (!title || !content) return;
 
-    await addPost(title, content, user.id, user.email || 'Anonymous');
-    router.push('/board');
+    try {
+      setIsSubmitting(true);
+      await addPost(title, content, user.id, user.email || 'Anonymous');
+      router.push('/board');
+    } catch (error) {
+      console.error('Failed to publish post:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -49,9 +59,14 @@ const BoardWritePage = () => {
             <Button variant="ghost" size="sm" className="h-8 text-[12px] border-white/[0.03]" onClick={() => router.back()}>
               Cancel
             </Button>
-            <Button size="sm" className="h-8 gap-1.5 text-[12px] font-medium px-4 shadow-[0_1px_10px_rgba(94,106,210,0.2)]" onClick={handleSubmit}>
-              <Send size={14} />
-              Publish Issue
+            <Button 
+              size="sm" 
+              className="h-8 gap-1.5 text-[12px] font-medium px-4 shadow-[0_1px_10px_rgba(94,106,210,0.2)]" 
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+            >
+              <Send size={14} className={cn(isSubmitting && "animate-pulse")} />
+              {isSubmitting ? 'Publishing...' : 'Publish Issue'}
             </Button>
           </div>
         </div>

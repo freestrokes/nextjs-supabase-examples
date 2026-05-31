@@ -6,12 +6,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #08090a;
-  --panel: #f3f4f5;
-  --border: #e2e4e7;
-  --text-primary: #08090a;
-  --text-secondary: #474d57;
-  --text-tertiary: #8a8f98;
+  --foreground: #000000;
+  --panel: #f1f3f5;
+  --border: #dee2e6;
+  --text-primary: #000000;
+  --text-secondary: #495057;
+  --text-tertiary: #868e96;
   --accent: #5e6ad2;
 }
 

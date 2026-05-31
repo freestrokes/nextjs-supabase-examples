@@ -14,6 +14,7 @@ const BoardDetailPage = () => {
   const { posts, deletePost, fetchPosts } = useBoardStore();
   const { user } = useAuthStore();
   const [post, setPost] = useState<Post | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     if (posts.length === 0) fetchPosts();
@@ -22,10 +23,17 @@ const BoardDetailPage = () => {
   }, [id, posts, fetchPosts]);
 
   const handleDelete = async () => {
-    if (!id || typeof id !== 'string') return;
+    if (!id || typeof id !== 'string' || isDeleting) return;
     if (confirm('Are you sure you want to delete this issue?')) {
-      await deletePost(id);
-      router.push('/board');
+      try {
+        setIsDeleting(true);
+        await deletePost(id);
+        router.push('/board');
+      } catch (error) {
+        console.error('Failed to delete post:', error);
+      } finally {
+        setIsDeleting(false);
+      }
     }
   };
 
@@ -57,9 +65,15 @@ const BoardDetailPage = () => {
                 <Edit3 size={14} />
                 Edit
               </Button>
-              <Button variant="subtle" size="sm" className="h-8 gap-1.5 text-[12px] text-red-400/80 hover:text-red-400 border-white/[0.03]" onClick={handleDelete}>
-                <Trash2 size={14} />
-                Delete
+              <Button 
+                variant="subtle" 
+                size="sm" 
+                className="h-8 gap-1.5 text-[12px] text-red-400/80 hover:text-red-400 border-white/[0.03]" 
+                onClick={handleDelete}
+                disabled={isDeleting}
+              >
+                <Trash2 size={14} className={cn(isDeleting && "animate-spin")} />
+                {isDeleting ? 'Deleting...' : 'Delete'}
               </Button>
             </div>
           )}

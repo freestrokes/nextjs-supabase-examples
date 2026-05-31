@@ -76,16 +76,16 @@ export const Layout = ({ children }: LayoutProps) => {
   }
 
   return (
-    <div className="flex min-h-screen bg-white dark:bg-linear-black font-inter antialiased text-linear-light-text dark:text-linear-text-primary transition-colors">
+    <div className="flex min-h-screen bg-linear-black font-inter antialiased text-linear-text-primary transition-colors">
       <Head>
         <title>Linear Board</title>
       </Head>
 
       {/* Mobile Header */}
-      <header className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between border-b border-linear-light-border dark:border-white/[0.05] bg-linear-light-panel/80 dark:bg-linear-black/80 px-4 backdrop-blur-md lg:hidden">
+      <header className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between border-b border-linear-border bg-linear-panel/80 px-4 backdrop-blur-md lg:hidden">
         <button 
           onClick={() => setIsMobileMenuOpen(true)}
-          className="p-2 text-linear-light-text-muted dark:text-linear-text-tertiary hover:text-black dark:hover:text-white transition-colors"
+          className="p-2 text-linear-text-tertiary hover:text-linear-text-primary transition-colors"
         >
           <Menu size={20} />
         </button>
@@ -107,7 +107,7 @@ export const Layout = ({ children }: LayoutProps) => {
       {/* Sidebar */}
       <aside 
         className={cn(
-          "fixed left-0 top-0 z-50 h-screen border-r border-linear-light-border dark:border-white/[0.05] bg-linear-light-panel dark:bg-linear-panel transition-all duration-300 ease-in-out lg:translate-x-0",
+          "fixed left-0 top-0 z-50 h-screen border-r border-linear-border bg-linear-panel transition-all duration-300 ease-in-out lg:translate-x-0",
           isCollapsed ? "w-[60px]" : "w-[240px]",
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         )}
@@ -116,7 +116,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <div className="space-y-6">
             {/* User Profile / Logo */}
             <div className={cn("flex items-center justify-between px-2 py-2", isCollapsed && "justify-center")}>
-              <div className="flex items-center gap-3 overflow-hidden">
+              <div className="flex items-center gap-3 overflow-hidden text-linear-text-primary">
                 <div className="h-6 w-6 rounded bg-linear-indigo flex items-center justify-center text-[10px] font-bold text-white shrink-0 shadow-lg">L</div>
                 {!isCollapsed && (
                   <span className="text-sm font-semibold truncate tracking-tight">
@@ -127,7 +127,7 @@ export const Layout = ({ children }: LayoutProps) => {
               {!isCollapsed && (
                 <button 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="lg:hidden text-linear-light-text-muted dark:text-linear-text-tertiary hover:text-black dark:hover:text-white"
+                  className="lg:hidden text-linear-text-tertiary hover:text-linear-text-primary"
                 >
                   <ChevronLeft size={16} />
                 </button>
@@ -141,10 +141,10 @@ export const Layout = ({ children }: LayoutProps) => {
                   key={item.name} 
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.05]",
+                    "flex items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium transition-colors hover:bg-white/[0.05]",
                     router.pathname === item.href 
-                      ? "bg-black/[0.05] dark:bg-white/[0.08] text-black dark:text-white" 
-                      : "text-linear-light-text-muted dark:text-linear-text-tertiary",
+                      ? "bg-white/[0.08] text-linear-text-primary" 
+                      : "text-linear-text-tertiary",
                     isCollapsed && "justify-center"
                   )}
                 >
@@ -157,12 +157,12 @@ export const Layout = ({ children }: LayoutProps) => {
             {/* Quick Actions */}
             {!isCollapsed && (
               <div className="px-2 space-y-4 pt-4">
-                <p className="text-[11px] font-bold text-linear-light-text-muted dark:text-linear-text-tertiary/40 uppercase tracking-widest">{t('workspace')}</p>
+                <p className="text-[11px] font-bold text-linear-text-tertiary/40 uppercase tracking-widest">{t('workspace')}</p>
                 <div className="space-y-1">
-                  <button className="flex w-full items-center gap-3 px-1 py-1 text-[12px] text-linear-light-text-muted dark:text-linear-text-tertiary hover:text-black dark:hover:text-linear-text-primary transition-colors">
+                  <button className="flex w-full items-center gap-3 px-1 py-1 text-[12px] text-linear-text-tertiary hover:text-linear-text-primary transition-colors">
                     <PlusCircle size={14} /> {t('newProject')}
                   </button>
-                  <button className="flex w-full items-center gap-3 px-1 py-1 text-[12px] text-linear-light-text-muted dark:text-linear-text-tertiary hover:text-black dark:hover:text-linear-text-primary transition-colors">
+                  <button className="flex w-full items-center gap-3 px-1 py-1 text-[12px] text-linear-text-tertiary hover:text-linear-text-primary transition-colors">
                     <Search size={14} /> {t('search')}
                   </button>
                 </div>
@@ -171,20 +171,20 @@ export const Layout = ({ children }: LayoutProps) => {
           </div>
 
           {/* Bottom Actions */}
-          <div className="space-y-1 border-t border-linear-light-border dark:border-white/[0.05] pt-3">
+          <div className="space-y-1 border-t border-linear-border pt-3">
             {/* Theme & Language Toggles */}
             {!isCollapsed && (
               <div className="flex items-center justify-between px-2 mb-2">
                 <button 
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  className="p-1.5 rounded-md hover:bg-black/[0.03] dark:hover:bg-white/[0.05] text-linear-light-text-muted dark:text-linear-text-tertiary transition-colors"
+                  className="p-1.5 rounded-md hover:bg-white/[0.05] text-linear-text-tertiary transition-colors"
                   title="Toggle Theme"
                 >
                   {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
                 </button>
                 <button 
                   onClick={() => setLanguage(language === 'ko' ? 'en' : 'ko')}
-                  className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-black/[0.03] dark:hover:bg-white/[0.05] text-[11px] font-bold text-linear-light-text-muted dark:text-linear-text-tertiary uppercase transition-colors"
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/[0.05] text-[11px] font-bold text-linear-text-tertiary uppercase transition-colors"
                 >
                   <Globe size={14} /> {language}
                 </button>
@@ -194,7 +194,7 @@ export const Layout = ({ children }: LayoutProps) => {
             <button 
               onClick={signOut}
               className={cn(
-                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-light-text-muted dark:text-linear-text-tertiary hover:bg-black/[0.03] dark:hover:bg-white/[0.05] hover:text-red-500 dark:hover:text-red-400/80 transition-colors",
+                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-text-tertiary hover:bg-white/[0.05] hover:text-red-400/80 transition-colors",
                 isCollapsed && "justify-center"
               )}
             >
@@ -203,7 +203,7 @@ export const Layout = ({ children }: LayoutProps) => {
             </button>
             <button 
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="hidden lg:flex w-full items-center justify-center py-2 text-linear-light-text-muted dark:text-linear-text-tertiary/30 hover:text-black dark:hover:text-linear-text-tertiary transition-colors"
+              className="hidden lg:flex w-full items-center justify-center py-2 text-linear-text-tertiary/30 hover:text-linear-text-primary transition-colors"
             >
               {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
             </button>

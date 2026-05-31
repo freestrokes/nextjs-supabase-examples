@@ -11,26 +11,17 @@ const config: Config = {
     extend: {
       colors: {
         linear: {
-          black: "#08090a",
-          panel: "#0f1011",
-          surface: "#191a1b",
+          black: "var(--background)",
+          panel: "var(--panel)",
+          surface: "var(--background)",
           indigo: "#5e6ad2",
           violet: "#7170ff",
           hover: "#828fff",
-          "text-primary": "#f7f8f8",
-          "text-secondary": "#d0d6e0",
-          "text-tertiary": "#8a8f98",
-          border: "rgba(255,255,255,0.08)",
-          "border-subtle": "rgba(255,255,255,0.05)",
-          // Light Mode Colors
-          light: {
-            bg: "#f7f8f8",
-            surface: "#ffffff",
-            panel: "#f3f4f5",
-            border: "#d0d6e0",
-            text: "#08090a",
-            "text-muted": "#62666d",
-          }
+          "text-primary": "var(--text-primary)",
+          "text-secondary": "var(--text-secondary)",
+          "text-tertiary": "var(--text-tertiary)",
+          border: "var(--border)",
+          "border-subtle": "var(--border)",
         },
       },
       fontFamily: {

@@ -5,10 +5,13 @@
 }
 
 :root {
-  --background: #f7f8f8;
+  --background: #ffffff;
   --foreground: #08090a;
   --panel: #f3f4f5;
   --border: #d0d6e0;
+  --text-primary: #08090a;
+  --text-secondary: #62666d;
+  --text-tertiary: #8a8f98;
 }
 
 .dark {
@@ -16,11 +19,14 @@
   --foreground: #f7f8f8;
   --panel: #0f1011;
   --border: rgba(255, 255, 255, 0.05);
+  --text-primary: #f7f8f8;
+  --text-secondary: #d0d6e0;
+  --text-tertiary: #8a8f98;
 }
 
 body {
   background-color: var(--background);
-  color: var(--foreground);
+  color: var(--text-primary);
   font-family: var(--font-inter);
   /* Linear's signature Inter configuration */
   font-feature-settings: "cv01", "ss03";

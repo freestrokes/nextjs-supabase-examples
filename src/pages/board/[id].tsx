@@ -7,6 +7,7 @@ import { useBoardStore, Post } from '@/store/useBoardStore';
 import { useAuthStore } from '@/store/useAuthStore';
 import { ChevronLeft, Trash2, Edit3, Calendar, User, Hash } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/utils/cn';
 
 const BoardDetailPage = () => {
   const router = useRouter();

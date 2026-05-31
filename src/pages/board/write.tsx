@@ -95,28 +95,6 @@ const BoardWritePage = () => {
           <p>Publicly viewable by the community</p>
         </div>
       </div>
-
-      <style jsx global>{`
-        .linear-quill-wrapper .ql-toolbar.ql-snow {
-          border: none !important;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-          padding: 12px 20px !important;
-        }
-        .linear-quill-wrapper .ql-container.ql-snow {
-          border: none !important;
-          padding: 8px 12px !important;
-          font-family: 'Inter', sans-serif !important;
-          font-size: 15px !important;
-        }
-        .linear-quill-wrapper .ql-editor.ql-blank::before {
-          color: rgba(255, 255, 255, 0.1) !important;
-          font-style: normal !important;
-          left: 20px !important;
-        }
-        .linear-quill-wrapper .ql-editor {
-          padding: 20px !important;
-        }
-      `}</style>
     </Layout>
   );
 };

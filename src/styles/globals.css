@@ -78,3 +78,31 @@ body {
 .ql-snow .ql-picker {
   color: #d0d6e0 !important;
 }
+
+/* Linear-style Quill Editor Customization */
+.linear-quill-wrapper .ql-toolbar.ql-snow {
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 12px 20px !important;
+}
+
+.linear-quill-wrapper .ql-container.ql-snow {
+  border: none !important;
+  padding: 8px 12px !important;
+  font-family: var(--font-inter) !important;
+  font-size: 15px !important;
+}
+
+.linear-quill-wrapper .ql-editor.ql-blank::before {
+  color: rgba(255, 255, 255, 0.1) !important;
+  font-style: normal !important;
+  left: 20px !important;
+}
+
+.dark .linear-quill-wrapper .ql-editor.ql-blank::before {
+  color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.linear-quill-wrapper .ql-editor {
+  padding: 20px !important;
+}

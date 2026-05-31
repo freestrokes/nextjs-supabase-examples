@@ -31,17 +31,15 @@ body {
   color: var(--text-primary);
   font-family: var(--font-inter);
   transition: background-color 0.2s, color 0.2s;
+  /* Linear's signature Inter configuration */
+  font-feature-settings: "cv01", "ss03";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Ensure all SVG icons inherit the correct theme color */
 svg {
   color: inherit;
-}
-
-  /* Linear's signature Inter configuration */
-  font-feature-settings: "cv01", "ss03";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Linear-style selection */
@@ -68,33 +66,6 @@ svg {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Quill Editor Dark Theme Customization */
-.ql-container.ql-snow {
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 0 0 6px 6px;
-  background: rgba(255, 255, 255, 0.02);
-  color: #f7f8f8;
-}
-
-.ql-toolbar.ql-snow {
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-bottom: none !important;
-  border-radius: 6px 6px 0 0;
-  background: #0f1011;
-}
-
-.ql-snow .ql-stroke {
-  stroke: #d0d6e0 !important;
-}
-
-.ql-snow .ql-fill {
-  fill: #d0d6e0 !important;
-}
-
-.ql-snow .ql-picker {
-  color: #d0d6e0 !important;
-}
-
 /* Linear-style Quill Editor Customization */
 .linear-quill-wrapper .ql-toolbar.ql-snow {
   border: none !important;
@@ -110,15 +81,23 @@ svg {
 }
 
 .linear-quill-wrapper .ql-editor.ql-blank::before {
-  color: rgba(255, 255, 255, 0.1) !important;
+  color: #8a8f98 !important;
   font-style: normal !important;
   left: 20px !important;
 }
 
-.dark .linear-quill-wrapper .ql-editor.ql-blank::before {
-  color: rgba(255, 255, 255, 0.1) !important;
-}
-
 .linear-quill-wrapper .ql-editor {
   padding: 20px !important;
+}
+
+.ql-snow .ql-stroke {
+  stroke: var(--text-secondary) !important;
+}
+
+.ql-snow .ql-fill {
+  fill: var(--text-secondary) !important;
+}
+
+.ql-snow .ql-picker {
+  color: var(--text-secondary) !important;
 }

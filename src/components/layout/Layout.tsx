@@ -52,6 +52,15 @@ export const Layout = ({ children }: LayoutProps) => {
     return () => subscription.unsubscribe();
   }, [setSession, router.pathname]);
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      router.push('/auth/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   if (!mounted) return null;
 
   const navItems = [
@@ -192,9 +201,9 @@ export const Layout = ({ children }: LayoutProps) => {
             )}
 
             <button 
-              onClick={signOut}
+              onClick={handleSignOut}
               className={cn(
-                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-text-tertiary hover:bg-linear-panel hover:text-red-400/80 transition-colors",
+                "flex w-full items-center gap-3 rounded-md px-2 py-1.5 text-[13px] font-medium text-linear-text-tertiary hover:bg-white/[0.05] hover:text-red-400/80 transition-colors",
                 isCollapsed && "justify-center"
               )}
             >

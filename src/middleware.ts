@@ -62,8 +62,12 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // 0. 콜백 페이지는 인증 체크 제외 (세션 처리 중인 상태이므로)
-  if (request.nextUrl.pathname === '/auth/callback') {
+  // 0. 인증 체크 제외 경로
+  const isExcludedPath = 
+    request.nextUrl.pathname === '/auth/callback' || 
+    request.nextUrl.pathname === '/api/keep-alive';
+
+  if (isExcludedPath) {
     return response
   }
 

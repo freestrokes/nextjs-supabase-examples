@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Layout } from '@/components/layout/Layout';
-import { Card } from '@/components/common/Card';
-import { Button } from '@/components/common/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { useBoardStore } from '@/store/useBoardStore';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/router';
-import { ChevronLeft, Send, Sparkles } from 'lucide-react';
+import { ChevronLeft, Send, Sparkles, FileEdit } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/utils/cn';
 
@@ -47,67 +49,77 @@ const BoardWritePage = () => {
 
   return (
     <Layout>
-      <div className="py-8 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <Link href="/board" className="group flex items-center gap-2 text-[13px] text-linear-text-tertiary hover:text-linear-text-primary transition-colors">
-            <ChevronLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
-            Back to Issues
-          </Link>
-          
+      <div className="space-y-6">
+        {/* Header Breadcrumb & Actions */}
+        <div className="flex items-center justify-between pb-4 border-b border-border">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" className="h-8 text-[12px] border-white/[0.03]" onClick={() => router.back()}>
+            <Link href="/board">
+              <Button variant="ghost" size="sm" className="h-8 gap-1 text-xs">
+                <ChevronLeft className="h-4 w-4" />
+                <span>Back to Tasks</span>
+              </Button>
+            </Link>
+            <span className="text-muted-foreground">/</span>
+            <div className="flex items-center gap-2">
+              <FileEdit className="h-4 w-4 text-primary" />
+              <span className="text-sm font-semibold">New Administrative Record</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => router.back()}>
               Cancel
             </Button>
             <Button 
               size="sm" 
-              className="h-8 gap-1.5 text-[12px] font-medium px-4 shadow-[0_1px_10px_rgba(94,106,210,0.2)]" 
+              className="h-8 gap-1.5 text-xs font-medium" 
               onClick={handleSubmit}
               disabled={isSubmitting}
             >
-              <Send size={14} className={cn(isSubmitting && "animate-pulse")} />
-              {isSubmitting ? 'Publishing...' : 'Publish Issue'}
+              <Send className={cn("h-3.5 w-3.5", isSubmitting && "animate-pulse")} />
+              {isSubmitting ? 'Saving...' : 'Save Task'}
             </Button>
           </div>
         </div>
 
-        {/* Editor Area */}
-        <div className="space-y-6">
-          <div className="px-2 space-y-4">
-            <div className="flex items-center gap-2 text-linear-indigo">
-              <Sparkles size={16} />
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em]">New Draft</span>
-            </div>
-            <input
+        {/* Form Content Area */}
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Task Title
+            </label>
+            <Input
               type="text"
-              placeholder="Issue title"
+              placeholder="Enter task title or issue description..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-transparent text-[32px] font-medium text-linear-text-primary outline-none placeholder:text-white/[0.1] tracking-display"
+              className="h-10 text-base bg-card font-medium"
               autoFocus
             />
           </div>
           
-          <Card className="p-0 border-white/[0.05] bg-white/[0.01] overflow-hidden">
-            <div className="min-h-[450px] linear-quill-wrapper">
-              {mounted && (
-                <Editor
-                  value={content}
-                  onChange={setContent}
-                  placeholder="Add description..."
-                />
-              )}
-            </div>
-          </Card>
+          <div className="space-y-2">
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Task Details & Description
+            </label>
+            <Card className="p-0 border-border overflow-hidden bg-card">
+              <div className="min-h-[400px] linear-quill-wrapper">
+                {mounted && (
+                  <Editor
+                    value={content}
+                    onChange={setContent}
+                    placeholder="Write your task specification or notes..."
+                  />
+                )}
+              </div>
+            </Card>
+          </div>
         </div>
 
-        {/* Help Footer */}
-        <div className="flex justify-between items-center px-2 text-[11px] text-linear-text-tertiary/40 font-medium tracking-wide uppercase">
-          <div className="flex gap-4">
-            <span>Markdown supported</span>
-            <span>Auto-saving enabled</span>
-          </div>
-          <p>Publicly viewable by the community</p>
+        {/* Footer Info */}
+        <div className="flex justify-between items-center text-xs text-muted-foreground pt-2">
+          <span>Rich text supported • Recorded to Supabase audit log</span>
+          <Badge variant="outline" className="text-[10px]">Ready to Submit</Badge>
         </div>
       </div>
     </Layout>

@@ -9,8 +9,8 @@ export const Card = ({ className, hoverable = false, ...props }: CardProps) => {
   return (
     <div
       className={cn(
-        'rounded-lg border border-linear-border bg-white/2 p-4 text-linear-text-primary transition-colors',
-        hoverable && 'hover:bg-white/4',
+        'rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-all',
+        hoverable && 'hover:bg-muted/40 hover:border-border/80',
         className
       )}
       {...props}
